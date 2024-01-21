@@ -42,7 +42,9 @@ namespace Counting21._01._24
         int start = 0; 
         int to = 0;
         int divisibleNum = 1;
-        string nums = "";
+        //string nums = "";
+        //int[] nums;
+        List<int> dynamicArray = new List<int>();
         int lineControl = 1;
 
         private void btnCount_Click(object sender, EventArgs e)
@@ -63,28 +65,33 @@ namespace Counting21._01._24
             {
                 if (i % divisibleNum == 0)
                 {
-                    nums += i.ToString()+" ";
-                    if (lineControl%10==0)
-                    {
-                        nums+= Environment.NewLine;
-                    }
-                        lineControl++;
+                     dynamicArray.Add(i);
+                    //nums += i +" ";
+                    //if (lineControl%10==0)
+                    //{
+                    //    //nums+= Environment.NewLine;
+                    //}
+                    //    lineControl++;
                 }
             }
-           
-            //MessageBox.Show("start:  "+start + " to " + to + nums);
-            allNumsOutcome.Text = nums;
 
-
-
+                //allNumsOutcome.Text = nums;
+                allNumsOutcome.Text = Stringifyyyy(dynamicArray);
         }
     }
+        public string Stringifyyyy(List<int>numbersArray)
+        {
+            //return string.Join(" ", numbersArray.Select(n => n.ToString()));
+            string result = string.Join("", numbersArray.Select((n, index) => (index > 0 && index % 10 == 0) ? $"\n{n} " : n.ToString() +" "));
+
+            return result;
+        }
 
     private void cmbDivisibleNumbers_SelectedIndexChanged(object sender, EventArgs e)
         {
             //divisibleNum = int.Parse(cmbDivisibleNumbers.SelectedItem); // Does not work with this kind of parse. (Needs "Convert.Int32")
             divisibleNum = Convert.ToInt32(cmbDivisibleNumbers.SelectedItem);
-            MessageBox.Show(""+divisibleNum);
+            //MessageBox.Show(""+divisibleNum);
         }
 
         private void textBoxStartsFrom_KeyPress(object sender, KeyPressEventArgs e)
